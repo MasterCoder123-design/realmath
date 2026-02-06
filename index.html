@@ -136,7 +136,7 @@ button:hover {
 </div>
 
 <script>
-const SECRET = "hehe"; // change this 😎
+const SECRET = "hehe"; // change this
 let bubble = null;
 let shiftCount = 0;
 let timer;
@@ -147,15 +147,23 @@ function openBubble() {
     return;
   }
 
-  // OPEN REAL BROWSER WINDOW 🫧
+  // Ask for URL like a real browser
+  let site = prompt("Enter website URL:");
+  if (!site) return;
+
+  if (!site.startsWith("http")) {
+    site = "https://" + site;
+  }
+
+  // Open REAL browser window (Chrome if it's your default)
   bubble = window.open(
-    "https://example.com",
+    site,
     "bubbleBrowser",
     "width=900,height=600,resizable=yes,scrollbars=yes"
   );
 }
 
-// DOUBLE SHIFT = CLOSE BUBBLE 👻
+// DOUBLE SHIFT = CLOSE BUBBLE 🫥
 document.addEventListener("keydown", e => {
   if (e.key === "Shift") {
     shiftCount++;
@@ -170,6 +178,7 @@ document.addEventListener("keydown", e => {
   }
 });
 </script>
+
 
 </body>
 </html>
