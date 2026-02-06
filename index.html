@@ -2,207 +2,160 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>IXL Math Practice</title>
+<title>IXL Practice</title>
 
 <style>
 :root {
-  --blue: #2f6fe4;
-  --bg: #f4f7fc;
-  --card: #ffffff;
-  --text: #1f2937;
+  --blue: #2563eb;
+  --bg: #f5f7fb;
+  --card: rgba(255,255,255,0.85);
+  --border: rgba(0,0,0,0.08);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  overflow: hidden;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  background: linear-gradient(180deg, #eef2ff, var(--bg));
+  color: #111827;
 }
 
 /* ---------- HEADER ---------- */
 .header {
   background: var(--blue);
   color: white;
-  padding: 18px 30px;
+  padding: 18px 32px;
   font-size: 22px;
   font-weight: 600;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  border-bottom-left-radius: 22px;
+  border-bottom-right-radius: 22px;
 }
 
-/* ---------- MATH SITE ---------- */
-#mathSite {
-  padding: 28px;
+/* ---------- MAIN ---------- */
+.container {
   max-width: 1100px;
   margin: auto;
+  padding: 30px;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  margin-top: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+  gap: 22px;
 }
 
 .card {
   background: var(--card);
-  padding: 20px;
-  border-radius: 18px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.card h3 {
+  margin: 0 0 8px;
 }
 
 .progress {
   height: 10px;
-  background: #e5e7eb;
   border-radius: 999px;
+  background: #e5e7eb;
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .progress span {
   display: block;
   height: 100%;
-  background: var(--blue);
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
 }
 
 /* ---------- LOGIN ---------- */
 .login {
-  margin-top: 30px;
-  max-width: 360px;
-  background: var(--card);
-  padding: 20px;
-  border-radius: 18px;
+  margin-top: 32px;
+  max-width: 380px;
 }
 
 input {
   width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid #cbd5e1;
-  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
   font-size: 15px;
 }
 
 button {
   width: 100%;
   margin-top: 12px;
-  padding: 10px;
+  padding: 12px;
+  border-radius: 16px;
   border: none;
-  border-radius: 14px;
   background: var(--blue);
   color: white;
   font-size: 15px;
   cursor: pointer;
 }
 
-/* ---------- BROWSER DRAWER ---------- */
-#browserDrawer {
-  position: fixed;
-  bottom: -70%;
-  left: 0;
-  width: 100%;
-  height: 70%;
-  background: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  box-shadow: 0 -20px 40px rgba(0,0,0,0.25);
-  transition: bottom 0.35s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-#browserDrawer.active {
-  bottom: 0;
-}
-
-.browserBar {
-  padding: 10px;
-  background: #eef2ff;
-  display: flex;
-  gap: 8px;
-}
-
-.browserBar input {
-  flex: 1;
-  border-radius: 999px;
-}
-
-.browserBar button {
-  width: 90px;
-  border-radius: 999px;
-}
-
-iframe {
-  flex: 1;
-  border: none;
+button:hover {
+  opacity: 0.92;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ---------- MATH SITE ---------- -->
-<div id="mathSite">
-  <div class="header">📘 IXL Math Practice</div>
+<div class="header">📘 IXL Math Practice</div>
 
+<div class="container">
   <div class="grid">
     <div class="card">
       <h3>Algebra</h3>
       <p>Linear equations</p>
-      <div class="progress"><span style="width:65%"></span></div>
+      <div class="progress"><span style="width:64%"></span></div>
     </div>
     <div class="card">
       <h3>Geometry</h3>
       <p>Angles & triangles</p>
-      <div class="progress"><span style="width:48%"></span></div>
+      <div class="progress"><span style="width:46%"></span></div>
     </div>
     <div class="card">
       <h3>Statistics</h3>
-      <p>Data & averages</p>
-      <div class="progress"><span style="width:82%"></span></div>
+      <p>Mean & median</p>
+      <div class="progress"><span style="width:81%"></span></div>
     </div>
   </div>
 
-  <div class="login">
+  <div class="login card">
     <h3>Teacher Access</h3>
     <input id="password" type="password" placeholder="Password">
-    <button onclick="unlock()">Log in</button>
+    <button onclick="openBubble()">Log in</button>
     <p id="error" style="color:red;"></p>
   </div>
 </div>
 
-<!-- ---------- HIDDEN BROWSER ---------- -->
-<div id="browserDrawer">
-  <div class="browserBar">
-    <input id="url" placeholder="https://example.com">
-    <button onclick="go()">Go</button>
-  </div>
-  <iframe id="browser" src="https://example.com"></iframe>
-</div>
-
 <script>
-const SECRET = "hehe"; // change this 🔒
+const SECRET = "hehe"; // change this 😎
+let bubble = null;
 let shiftCount = 0;
 let timer;
 
-function unlock() {
-  if (password.value === SECRET) {
-    browserDrawer.classList.add("active");
-  } else {
+function openBubble() {
+  if (password.value !== SECRET) {
     error.textContent = "Incorrect password";
+    return;
   }
+
+  // OPEN REAL BROWSER WINDOW 🫧
+  bubble = window.open(
+    "https://example.com",
+    "bubbleBrowser",
+    "width=900,height=600,resizable=yes,scrollbars=yes"
+  );
 }
 
-function go() {
-  let url = document.getElementById("url").value;
-  if (!url.startsWith("http")) url = "https://" + url;
-  document.getElementById("browser").src = url;
-}
-
-// DOUBLE SHIFT = INSTANT PANIC RETURN 🧮
+// DOUBLE SHIFT = CLOSE BUBBLE 👻
 document.addEventListener("keydown", e => {
   if (e.key === "Shift") {
     shiftCount++;
@@ -210,7 +163,7 @@ document.addEventListener("keydown", e => {
       timer = setTimeout(() => shiftCount = 0, 500);
     }
     if (shiftCount === 2) {
-      browserDrawer.classList.remove("active");
+      if (bubble && !bubble.closed) bubble.close();
       shiftCount = 0;
       clearTimeout(timer);
     }
